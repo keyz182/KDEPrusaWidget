@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Kieran Evans"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Shows print progress and temperatures for a Prusa 3D printer via PrusaLink, and opens its web UI on click.",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop"
+        ],
+        "Icon": "printer",
+        "Id": "com.github.keyz182.prusastatus",
+        "License": "GPL-3.0-or-later",
+        "Name": "Prusa Status",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
