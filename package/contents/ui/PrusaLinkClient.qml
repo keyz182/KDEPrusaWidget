@@ -69,9 +69,25 @@ QtObject {
     //   "normal"    — nothing to report
     // `printerOk` is status_printer.ok from PrusaLink (undefined when absent).
     function _severityFor(state, printerOk) {
-        // TODO(user): map the nine PrusaLink states to a severity.
-        // States: IDLE, BUSY, PRINTING, PAUSED, FINISHED, STOPPED, ERROR, ATTENTION, READY
-        return "normal"
+        switch (state) {
+        case "ERROR":
+            return "error"
+        case "ATTENTION":
+        case "FINISHED": // bed needs clearing before the next print
+            return "attention"
+        }
+        // The printer can report a problem while its state still looks fine.
+        if (printerOk === false) {
+            return "attention"
+        }
+        switch (state) {
+        case "PRINTING":
+        case "PAUSED":
+        case "BUSY":
+            return "active"
+        default: // IDLE, READY, STOPPED (usually user-initiated), unknown
+            return "normal"
+        }
     }
 
     function _isActive() {

@@ -64,8 +64,28 @@ Right-click the widget → Configure:
 | Poll interval while printing / idle | Seconds between status checks in each state. |
 | Show print thumbnail | Toggles the panel thumbnail. |
 
+On Buddy firmware printers (MK4, MK3.9, Core One, XL, MINI), the
+"API key" shown on the printer also works as the Digest password. Set
+Username to `maker`, put the key in Password, and leave API key empty. This
+gives you print thumbnails. Tested on a Core One+.
+
 Credentials are stored in plain text in
 `~/.config/plasma-org.kde.plasma.desktop-appletsrc`.
+
+## Alerts
+
+The widget maps the printer's state to an alert level:
+
+| Printer state | Widget behaviour |
+|---|---|
+| `ERROR` | Error icon, popup banner, Plasma "needs attention" status. |
+| `ATTENTION` (e.g. filament runout) | Warning icon, popup banner, "needs attention" status. |
+| `FINISHED` | Warning icon and "needs attention" status until the printer leaves this state, as a reminder to clear the bed. |
+| `PRINTING`, `PAUSED`, `BUSY` | Progress on the panel; faster polling. |
+| `IDLE`, `READY`, `STOPPED` | No alert. |
+
+If the printer reports a problem message while in any other state, the
+widget also shows a warning.
 
 ## Known limitations
 
